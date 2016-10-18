@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/armthepit/Week11-Hangman/issues"
   },
-  "homepage": "https://github.com/armthepit/Week11-Hangman#readme"
+  "homepage": "https://github.com/armthepit/Week11-Hangman#readme",
+  "dependencies": {
+    "inquirer": "^1.2.2",
+    "random-words": "0.0.1"
+  }
 }
