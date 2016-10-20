@@ -14,6 +14,7 @@ var playerName = '';
 var computerWord = '';
 var playerWord = '';
 var guessCounter = 10;
+var currentGuess = '';
 var playerGuesses = [];
 var wins = 0;
 var loses = 0;
@@ -50,9 +51,10 @@ function playGame() {
 		if (playerAnswer == "yes") {
 			clear();
 			console.log('Starting New Game ' + playerName);
+			setupGame();
 		} else {
 			clear();
-			console.log(playerName + ' thank you for dropping. Have a great day');
+			console.log(playerName + ' thank you for dropping by. Have a great day');
 		}
 	});	
 }
@@ -66,7 +68,28 @@ function setupGame() {
 	console.log(computerWord);
 	console.log(letter.playerWordArray);
 	console.log(playerWord);
-	// playGame();
+	playerGuess();
 }
+
+function playerGuess() {
+	// Ask for players guess
+	inquirer.prompt([
+		{
+			type: "text",
+			message: playerName + " What is your guess?",
+			name: "guess"
+		}
+	]).then(function(answer) {
+		currentGuess = answer.guess;
+		if (!/[^a-zA-Z]/.test(currentGuess) && currentGuess.length === 1) {
+			currentGuess = currentGuess.toLowerCase();
+		} else {
+			console.log(playerName + " please reenter your quess. Only letters please.")
+			playerGuess();
+		}
+	});	
+}
+
+
 
 greeting();
