@@ -7,3 +7,9 @@ var letter = require('./letter.js');
 // Load word.js
 var word = require('./word.js');
 
+function setupGame() {
+	computerWord = game.computerWord;
+	console.log(computerWord);
+}
+
+setupGame();
