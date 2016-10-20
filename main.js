@@ -15,6 +15,7 @@ var playerName = '';
 var computerWord = '';
 var playerWord = '';
 var playerWordArray = [];
+var duplicateLetters = false;
 var guessCounter = 10;
 var currentGuess = '';
 var playerGuesses = [];
@@ -66,6 +67,7 @@ function playGame() {
 function setupGame() {
 	// Call game.js to get random computer word which player will try to guess
 	computerWord = game.computerWord;
+	computerWord = 'baaal';
 	// Call letter.js and run the playerWordSetup to put in _ to show how many letters are in the computer word.
 	letter = new letter(computerWord);
 	playerWord = letter.playerWordSetup();
@@ -99,18 +101,22 @@ function playerGuess() {
 			console.log(playerName + " please reenter your quess. Only letters please.")
 			playerGuess();
 		}
-		playerGuesses.push(currentGuess);
 		checkGuess()
 	});	
 }
 // Check to see if the player's guess is in the computer word.
 function checkGuess() {
-	word.checkGuess(currentGuess,computerWord);
+	word.checkGuess(currentGuess,computerWord,duplicateLetters);
+	if (duplicateLetters = false) {
+		playerGuesses.push(currentGuess);
+		console.log(playerGuess);
+	}			
 	status = word.status;
 	if (status === 'found') {
 		// clear();
-		console.log(status);
-	}
+		updatePlayerWord();
+	} 
+
 	// guessCounter --;
 	// checkGuessCounter();
 }

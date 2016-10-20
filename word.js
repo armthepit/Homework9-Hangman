@@ -1,4 +1,5 @@
 var Word = function() {
+	this.computerWord;
 	this.playerGuesses = '';
 	this.status = '';
 	// Check to make sure player has not called letter previously.
@@ -22,6 +23,7 @@ var Word = function() {
 			return this.status;
 		}
 	}
+
 }
 
 module.exports = Word;
