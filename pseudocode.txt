@@ -1,0 +1,33 @@
+Hangman
+
+Main.js
+will contain the logic of your app.
+
+Game.js
+file will randomly select a word for the player.
+
+Word.js
+should contain all of the methods which will check the letters guessed versus the random word selected.
+
+Letter.js
+should control whether or not a letter appears as a "_" or as itself on-screen.
+
+
+
+Steps & Module
+
+Main.js - Player constructor
+	Name
+	Wins method
+	Losses method
+
+Game.js - Run the random-words node package to get word.
+Make it available by export
+
+Letter.js - Take the random word and create the quess word with _ space _ for the length of the random word.
+
+Word.js - Guess Word constructor
+	current word status;ie, b_s_b_ll pulled from letter.js
+	Number of Guesses method
+	Wrong Letters Already Guessed method
+	Correct Letters Already Guessed method 
