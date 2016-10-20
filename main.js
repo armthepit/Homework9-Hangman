@@ -10,6 +10,7 @@ var letter = require('./letter.js');
 var word = require('./word.js');
 
 // Global Variables
+var playerName = '';
 var computerWord = '';
 var playerWord = '';
 var guessCounter = 10;
@@ -28,9 +29,32 @@ function greeting() {
 		}
 	]).then(function(name) {
 		clear();
-		console.log("Welcome To Hangman "+ name.name);
+		playerName = name.name;
+		console.log("Welcome To Hangman " + playerName);
 		console.log("A fun way to waste sometime");
+		playGame();
 	});
+}
+
+function playGame() {
+	// Ask if player wants to play
+	inquirer.prompt([
+		{
+			type: "text",
+			message: "Do you want to play?",
+			choices: ["yes","no"],
+			name: "answer"
+		}
+	]).then(function(answer) {
+		var playerAnswer = answer.answer.toLowerCase()
+		if (playerAnswer == "yes") {
+			clear();
+			console.log('Starting New Game ' + playerName);
+		} else {
+			clear();
+			console.log(playerName + ' thank you for dropping. Have a great day');
+		}
+	});	
 }
 
 function setupGame() {
