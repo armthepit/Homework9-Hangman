@@ -11,6 +11,12 @@ var Letter = function(computerWord) {
 		this.playerWord = this.playerWord.replace(new RegExp(',', 'g'), '');
 		return this.playerWord, this.playerWordArray;
 	}
+	// Update the Player word with the player's guess
+	this.updatePlayerWord = function(playerWordArray,computerWord,currentGuess) {
+		playerWordArray[computerWord.search(currentGuess)] = currentGuess;
+		this.computerWord = computerWord.replace(new RegExp(currentGuess), '_');
+		return playerWordArray, this.computerWord;
+	}	
 }
 
 module.exports = Letter;

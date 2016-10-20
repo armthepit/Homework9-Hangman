@@ -23,7 +23,12 @@ var Word = function() {
 			return this.status;
 		}
 	}
-
+	// Update the Player word with the player's guess
+	this.updatePlayerWord = function(playerWordArray,computerWord,currentGuess) {
+		playerWordArray[computerWord.search(currentGuess)] = currentGuess;
+		this.computerWord = computerWord.replace(new RegExp(currentGuess), '_');
+		return playerWordArray, this.computerWord;
+	}
 }
 
 module.exports = Word;

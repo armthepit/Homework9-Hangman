@@ -121,7 +121,16 @@ function checkGuess() {
 	// checkGuessCounter();
 }
 
-
+// Update the Player word with the player's guess
+function updatePlayerWord() {
+	letter.updatePlayerWord(playerWordArray,computerWord,currentGuess);
+	computerWord = letter.computerWord;
+	console.log(computerWord);
+	console.log(playerWordArray);
+	// Check to see if the computer word has duplicate letters matching player's guess
+	duplicateLetters = true;
+	checkGuess();
+}
 
 
 greeting();
