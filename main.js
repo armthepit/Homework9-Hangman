@@ -107,20 +107,17 @@ function playerGuess() {
 // Check to see if the player's guess is in the computer word.
 function checkGuess() {
 	word.checkGuess(currentGuess,computerWord,duplicateLetters);
-	console.log('pwa ' + playerWordArray);
 	if (duplicateLetters === false) {
 		playerGuesses.push(currentGuess);
 	}			
 	status = word.status;
-	console.log(status);
 	if (status === 'found') {
 		updatePlayerWord();
 	} else if (duplicateLetters === true) {
 		checkWinner();
+	} else {
+		decrementGuessCounter();
 	}
-
-	decrementGuessCounter();
-		
 }
 
 // Update the Player word with the player's guess
@@ -146,7 +143,10 @@ function checkWinner() {
 }
 
 function decrementGuessCounter() {
-	console.log('counter');
+	guessCounter --;
+	if (guessCounter > 0) {
+		playerGuess();
+	}
 }
 
 
