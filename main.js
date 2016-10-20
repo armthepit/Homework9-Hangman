@@ -40,7 +40,7 @@ function greeting() {
 		playGame();
 	});
 }
-
+// Prompt player to learn if he wants to play.
 function playGame() {
 	// Ask if player wants to play
 	inquirer.prompt([
@@ -62,7 +62,7 @@ function playGame() {
 		}
 	});	
 }
-
+// Initiallize game
 function setupGame() {
 	// Call game.js to get random computer word which player will try to guess
 	computerWord = game.computerWord;
@@ -75,8 +75,9 @@ function setupGame() {
 	console.log(playerWord);
 	playerGuess();
 }
-
+// Prompt player to enter guess.
 function playerGuess() {
+	// clear();
 	// Ask for players guess
 	inquirer.prompt([
 		{
@@ -88,11 +89,8 @@ function playerGuess() {
 		currentGuess = answer.guess;
 		if (!/[^a-zA-Z]/.test(currentGuess) && currentGuess.length === 1) {
 			currentGuess = currentGuess.toLowerCase();
-			console.log('cq ' + currentGuess);
-			console.log('pg ' + playerGuesses);
 			// Check to make sure player has not called letter previously.			
 			word.duplicateGuess(currentGuess, playerGuesses);
-			console.log('ws ' + word.status);
 			status = word.status;
 			if (status === 'repeat') {
 				playerGuess();
@@ -101,18 +99,23 @@ function playerGuess() {
 			console.log(playerName + " please reenter your quess. Only letters please.")
 			playerGuess();
 		}
+		playerGuesses.push(currentGuess);
+		checkGuess()
 	});	
+}
+// Check to see if the player's guess is in the computer word.
+function checkGuess() {
+	word.checkGuess(currentGuess,computerWord);
+	status = word.status;
+	if (status === 'found') {
+		// clear();
+		console.log(status);
+	}
+	// guessCounter --;
+	// checkGuessCounter();
 }
 
 
 
-// function checkGuess() {
-// 	console.log('check guess');
-// 	word = new word(computerWord, currentGuess, playerWordArray, playerGuesses);
-// 	currentGuessResult = word.checkGuess();
-// 	console.log('ws ' + word.status);
-// 	console.log('gq ' + playerGuesses);
-// 	console.log('guesses ' + word.playerGuesses);
-// }
 
 greeting();
