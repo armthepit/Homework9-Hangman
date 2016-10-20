@@ -67,7 +67,7 @@ function playGame() {
 function setupGame() {
 	// Call game.js to get random computer word which player will try to guess
 	computerWord = game.computerWord;
-	computerWord = 'baaal';
+	computerWord = 'aaa';
 	// Call letter.js and run the playerWordSetup to put in _ to show how many letters are in the computer word.
 	letter = new letter(computerWord);
 	playerWord = letter.playerWordSetup();
@@ -107,30 +107,48 @@ function playerGuess() {
 // Check to see if the player's guess is in the computer word.
 function checkGuess() {
 	word.checkGuess(currentGuess,computerWord,duplicateLetters);
-	if (duplicateLetters = false) {
+	console.log('pwa ' + playerWordArray);
+	if (duplicateLetters === false) {
 		playerGuesses.push(currentGuess);
-		console.log(playerGuess);
 	}			
 	status = word.status;
+	console.log(status);
 	if (status === 'found') {
-		// clear();
 		updatePlayerWord();
-	} 
+	} else if (duplicateLetters === true) {
+		checkWinner();
+	}
 
-	// guessCounter --;
-	// checkGuessCounter();
+	decrementGuessCounter();
+		
 }
 
 // Update the Player word with the player's guess
 function updatePlayerWord() {
 	letter.updatePlayerWord(playerWordArray,computerWord,currentGuess);
 	computerWord = letter.computerWord;
-	console.log(computerWord);
-	console.log(playerWordArray);
 	// Check to see if the computer word has duplicate letters matching player's guess
 	duplicateLetters = true;
 	checkGuess();
 }
+
+// Check to see if player is winner after last guess. If not keep playing.
+function checkWinner() {
+	console.log('checkwinner');
+	// Check to see if any _ remain in the PlayerWord
+	word.checkWinner(playerWordArray);
+	status = word.status;
+	if ( status === "winner") {
+		console.log('winner');
+	} else {
+		decrementGuessCounter();
+	}
+}
+
+function decrementGuessCounter() {
+	console.log('counter');
+}
+
 
 
 greeting();

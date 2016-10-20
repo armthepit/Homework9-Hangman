@@ -7,27 +7,28 @@ var Word = function() {
 		this.playerGuesses = playerGuesses;
 		if ( this.playerGuesses.indexOf(currentGuess) != -1) {
 			this.status = 'repeat';
-			return this.status;
 		} else {
 			this.status = '';
-			return this.status;
 		}
+		return this.status;
 	}
 	// Check to see if the player's guess is in the computer word.
 	this.checkGuess = function(currentGuess, computerWord) {
 		if (computerWord.search(currentGuess) === -1) {
 			this.status = 'notfound';
-			return this.status;
 		} else {
 			this.status = 'found';
-			return this.status;
 		}
+		return this.status;
 	}
-	// Update the Player word with the player's guess
-	this.updatePlayerWord = function(playerWordArray,computerWord,currentGuess) {
-		playerWordArray[computerWord.search(currentGuess)] = currentGuess;
-		this.computerWord = computerWord.replace(new RegExp(currentGuess), '_');
-		return playerWordArray, this.computerWord;
+	// Check to see if any _ remain in the PlayerWord
+	this.checkWinner = function(playerWordArray) {
+		if (playerWordArray.indexOf('_') === -1) {
+			this.status = "winner";
+		} else {
+			this.status = "no winner";
+		}
+		return this.status;
 	}
 }
 
