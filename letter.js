@@ -1,4 +1,3 @@
-
 var Letter = function(computerWord) {
 	this.playerWord = computerWord;
 	this.playerWordLength = computerWord.length;
@@ -10,7 +9,7 @@ var Letter = function(computerWord) {
 		}
 		this.playerWord = this.playerWordArray.toString();
 		this.playerWord = this.playerWord.replace(new RegExp(',', 'g'), '');
-		return this.playerWord;
+		return this.playerWord, this.playerWordArray;
 	}
 }
 

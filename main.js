@@ -7,20 +7,24 @@ var game = require('./game.js');
 // Load letter.js
 var letter = require('./letter.js');
 // Load word.js
-var word = require('./word.js');
+var Word = require('./word.js');
+word = new Word();
 
 // Global Variables
 var playerName = '';
 var computerWord = '';
 var playerWord = '';
+var playerWordArray = [];
 var guessCounter = 10;
 var currentGuess = '';
 var playerGuesses = [];
 var wins = 0;
 var loses = 0;
+var status = '';
 
 // Welcome new player
 function greeting() {
+	clear();
 	// Ask for players name
 	inquirer.prompt([
 		{
@@ -31,7 +35,7 @@ function greeting() {
 	]).then(function(name) {
 		clear();
 		playerName = name.name;
-		console.log("Welcome To Hangman " + playerName);
+		console.log("Welcome To The Game Of Hangman");
 		console.log("A fun way to waste sometime");
 		playGame();
 	});
@@ -42,13 +46,13 @@ function playGame() {
 	inquirer.prompt([
 		{
 			type: "text",
-			message: "Do you want to play?",
-			choices: ["yes","no"],
+			message: playerName + ", do you want to play (y/n)?",
+			choices: ["y","n"],
 			name: "answer"
 		}
 	]).then(function(answer) {
 		var playerAnswer = answer.answer.toLowerCase()
-		if (playerAnswer == "yes") {
+		if (playerAnswer == "y") {
 			clear();
 			console.log('Starting New Game ' + playerName);
 			setupGame();
@@ -65,6 +69,7 @@ function setupGame() {
 	// Call letter.js and run the playerWordSetup to put in _ to show how many letters are in the computer word.
 	letter = new letter(computerWord);
 	playerWord = letter.playerWordSetup();
+	playerWordArray = letter.playerWordArray;
 	console.log(computerWord);
 	console.log(letter.playerWordArray);
 	console.log(playerWord);
@@ -76,13 +81,22 @@ function playerGuess() {
 	inquirer.prompt([
 		{
 			type: "text",
-			message: playerName + " What is your guess?",
+			message: playerName + ", what is your guess?",
 			name: "guess"
 		}
 	]).then(function(answer) {
 		currentGuess = answer.guess;
 		if (!/[^a-zA-Z]/.test(currentGuess) && currentGuess.length === 1) {
 			currentGuess = currentGuess.toLowerCase();
+			console.log('cq ' + currentGuess);
+			console.log('pg ' + playerGuesses);
+			// Check to make sure player has not called letter previously.			
+			word.duplicateGuess(currentGuess, playerGuesses);
+			console.log('ws ' + word.status);
+			status = word.status;
+			if (status === 'repeat') {
+				playerGuess();
+			}
 		} else {
 			console.log(playerName + " please reenter your quess. Only letters please.")
 			playerGuess();
@@ -91,5 +105,14 @@ function playerGuess() {
 }
 
 
+
+// function checkGuess() {
+// 	console.log('check guess');
+// 	word = new word(computerWord, currentGuess, playerWordArray, playerGuesses);
+// 	currentGuessResult = word.checkGuess();
+// 	console.log('ws ' + word.status);
+// 	console.log('gq ' + playerGuesses);
+// 	console.log('guesses ' + word.playerGuesses);
+// }
 
 greeting();
