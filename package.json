@@ -21,7 +21,8 @@
   "homepage": "https://github.com/armthepit/Week11-Hangman#readme",
   "dependencies": {
     "clear": "0.0.1",
-    "inquirer": "^1.2.2",
-    "random-words": "0.0.1"
+    "prompt": "^1.0.0",
+    "random-words": "0.0.1",
+    "string": "^3.3.3"
   }
 }
